@@ -1,0 +1,20 @@
+{% extends 'bookmark/base.html' %}
+{%load newfilters%}
+{% block title %}
+Login to Bookmark
+{% endblock %}
+
+{%block body_block%}
+        <h2>Login to Bookmark</h2>
+
+        <form id="login_form" method="post" action="/bookmark/login/">
+            {% csrf_token %}
+            <label>Username:</label>
+            <input type="text" class="form-control" name="username" value=""/>
+            <br />
+          <label>Password:</label>
+            <input type="password" class="form-control" name="password" value=""/>
+            <br />
+            <button class="btn btn-primary" type="submit" name="submit">Login</button>
+        </form>
+{% endblock %}

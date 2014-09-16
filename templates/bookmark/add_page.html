@@ -1,0 +1,31 @@
+{% extends 'bookmark/base.html' %}
+{%load newfilters%}
+{% block title %}
+Add New Page for Category: {{category_name_url}}
+{% endblock %}
+
+{%block body_block%}
+        <h2>Add a Page</h2>
+
+      {% if not category_name_url %}
+        <h3> Category Does not Exist!</h3>
+      {% else %}
+        <form id="page_form" method="post" action="/bookmark/category/{{category_name_url}}/add_page/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                    {{ field |addcss:"class:form-control" }}          
+                </div>
+            {% endfor %}
+
+            <button class="btn btn-primary" type="submit" name="submit">Create Page</button>
+        </form>
+      {% endif %}
+{% endblock %}
